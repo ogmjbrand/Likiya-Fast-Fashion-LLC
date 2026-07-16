@@ -6,6 +6,7 @@ import { flutterwaveGateway } from "./flutterwave";
 import type { PaymentGateway, PaymentProviderId } from "./types";
 
 export * from "./types";
+export * from "./fulfillment";
 
 export const paymentGateways: Record<PaymentProviderId, PaymentGateway> = {
   stripe: stripeGateway,

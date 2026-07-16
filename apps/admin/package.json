@@ -1,0 +1,41 @@
+{
+  "name": "@likiya/admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf .next"
+  },
+  "dependencies": {
+    "@likiya/auth": "workspace:*",
+    "@likiya/config": "workspace:*",
+    "@likiya/database": "workspace:*",
+    "@likiya/inventory": "workspace:*",
+    "@likiya/types": "workspace:*",
+    "@likiya/ui": "workspace:*",
+    "@likiya/utils": "workspace:*",
+    "@supabase/supabase-js": "^2.110.7",
+    "lucide-react": "^1.24.0",
+    "next": "^15.5.20",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "recharts": "^3.9.2",
+    "sonner": "^2.0.7",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "^15.5.20",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

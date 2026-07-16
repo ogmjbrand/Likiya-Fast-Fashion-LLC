@@ -64,9 +64,12 @@ export async function updateSession(request: NextRequest, options: SessionUpdate
 
   const { pathname } = request.nextUrl;
 
-  const isProtected = protectedPrefixes.some((p) => pathname.startsWith(p));
-  const isStaffOnly = staffOnlyPrefixes.some((p) => pathname.startsWith(p));
   const isAuthPage = authPrefixes.some((p) => pathname.startsWith(p));
+  // Auth pages (/login, /register, ...) are never themselves protected —
+  // otherwise an unauthenticated visit to /login would redirect to /login,
+  // matching the same rule again on the next request.
+  const isProtected = !isAuthPage && protectedPrefixes.some((p) => pathname.startsWith(p));
+  const isStaffOnly = !isAuthPage && staffOnlyPrefixes.some((p) => pathname.startsWith(p));
 
   if ((isProtected || isStaffOnly) && !user) {
     const redirectUrl = new URL(loginPath, request.url);

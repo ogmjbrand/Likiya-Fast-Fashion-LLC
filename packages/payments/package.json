@@ -8,6 +8,10 @@
   },
   "dependencies": {
     "@likiya/config": "workspace:*",
+    "@likiya/database": "workspace:*",
+    "@likiya/email": "workspace:*",
+    "@likiya/inventory": "workspace:*",
+    "@likiya/utils": "workspace:*",
     "stripe": "^22.3.2",
     "server-only": "^0.0.1"
   },
