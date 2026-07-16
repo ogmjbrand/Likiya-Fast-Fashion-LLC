@@ -14,7 +14,7 @@ export default async function SearchPage({
 }) {
   const { q } = await searchParams;
   const query = q?.trim() ?? "";
-  const products = query ? await searchProducts(query) : [];
+  const products = query ? await searchProducts(query).catch(() => []) : [];
 
   return (
     <div className="container-luxury py-12">

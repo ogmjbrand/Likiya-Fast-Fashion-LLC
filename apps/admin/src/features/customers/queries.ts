@@ -2,6 +2,9 @@ import "server-only";
 
 import { createClient } from "@likiya/database/server";
 
+// `profiles` doesn't store email — that lives in `auth.users`. Joining it
+// in requires the service-role client (createAdminClient) or a Postgres
+// view; add one of those here if the customer list needs an email column.
 export async function getAdminCustomerList(page = 1, pageSize = 20) {
   const supabase = await createClient();
   const from = (page - 1) * pageSize;

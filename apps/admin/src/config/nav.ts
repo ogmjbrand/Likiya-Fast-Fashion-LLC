@@ -8,6 +8,7 @@ import {
   Ticket,
   Undo2,
   BarChart3,
+  ScrollText,
 } from "lucide-react";
 
 export interface NavItem {
@@ -25,4 +26,5 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Coupons", href: "/coupons", icon: Ticket },
   { label: "Returns", href: "/returns", icon: Undo2 },
   { label: "Analytics", href: "/analytics", icon: BarChart3 },
+  { label: "Audit Logs", href: "/audit-logs", icon: ScrollText },
 ];

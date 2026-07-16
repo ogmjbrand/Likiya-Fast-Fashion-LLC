@@ -6,7 +6,7 @@ export const siteConfig = {
   description:
     "Likiya is a luxury fashion house delivering considered, editorial menswear and womenswear — designed for longevity, cut for the modern wardrobe.",
   url: clientEnv.NEXT_PUBLIC_SITE_URL,
-  ogImage: "/og-image.jpg",
+  ogImage: "/opengraph-image",
   links: {
     instagram: "https://instagram.com/likiya",
     tiktok: "https://tiktok.com/@likiya",

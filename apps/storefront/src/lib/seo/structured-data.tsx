@@ -17,7 +17,7 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: siteConfig.fullName,
     url: siteConfig.url,
-    logo: new URL("/logo.png", siteConfig.url).toString(),
+    logo: new URL(siteConfig.ogImage, siteConfig.url).toString(),
     sameAs: Object.values(siteConfig.links),
   };
 }
