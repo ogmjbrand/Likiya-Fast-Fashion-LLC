@@ -37,7 +37,12 @@ function mapProduct(raw: RawProduct): ProductWithRelations {
     ...raw,
     brand: raw.brand,
     images: [...raw.images].sort((a, b) => a.position - b.position),
-    variants: [...raw.variants].sort((a, b) => a.position - b.position),
+    variants: [...raw.variants]
+      .sort((a, b) => a.position - b.position)
+      .map((variant) => ({
+        ...variant,
+        optionValueIds: variant.option_values.map((ov) => ov.option_value.id),
+      })),
     options: [...raw.options].sort((a, b) => a.position - b.position),
     categories: raw.categories.map((c) => c.category),
   };

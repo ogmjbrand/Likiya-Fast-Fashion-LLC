@@ -198,10 +198,15 @@ export interface ProductImage {
   created_at: string;
 }
 
+export interface ProductVariantWithOptions extends ProductVariant {
+  /** IDs of the product_option_values this variant matches (e.g. "Ivory", "M"). */
+  optionValueIds: string[];
+}
+
 export interface ProductWithRelations extends Product {
   brand: Brand | null;
   images: ProductImage[];
-  variants: ProductVariant[];
+  variants: ProductVariantWithOptions[];
   options: (ProductOption & { values: ProductOptionValue[] })[];
   categories: Category[];
 }
