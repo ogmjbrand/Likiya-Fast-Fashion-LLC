@@ -1,0 +1,20 @@
+{
+  "name": "@likiya/email",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@likiya/config": "workspace:*",
+    "resend": "^6.17.2",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

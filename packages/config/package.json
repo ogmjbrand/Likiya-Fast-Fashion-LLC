@@ -1,0 +1,21 @@
+{
+  "name": "@likiya/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/env.server.ts"
+  },
+  "dependencies": {
+    "zod": "^4.4.3",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

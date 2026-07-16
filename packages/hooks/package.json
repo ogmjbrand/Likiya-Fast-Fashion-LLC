@@ -1,0 +1,19 @@
+{
+  "name": "@likiya/hooks",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/react": "^19"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

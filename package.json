@@ -1,0 +1,33 @@
+{
+  "name": "likiya-platform",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:storefront": "turbo run dev --filter=@likiya/storefront",
+    "dev:admin": "turbo run dev --filter=@likiya/admin",
+    "dev:api": "turbo run dev --filter=@likiya/api",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "db:types": "supabase gen types typescript --linked > packages/database/src/generated-types.ts"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "typescript": "^5",
+    "@types/node": "^20",
+    "prettier": "^3.9.5",
+    "prettier-plugin-tailwindcss": "^0.8.1"
+  }
+}

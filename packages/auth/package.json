@@ -1,0 +1,29 @@
+{
+  "name": "@likiya/auth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts",
+    "./middleware": "./src/middleware.ts"
+  },
+  "dependencies": {
+    "@likiya/config": "workspace:*",
+    "@likiya/database": "workspace:*",
+    "@supabase/ssr": "^0.12.3",
+    "zod": "^4.4.3",
+    "server-only": "^0.0.1"
+  },
+  "peerDependencies": {
+    "next": "*",
+    "react": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/react": "^19"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}
