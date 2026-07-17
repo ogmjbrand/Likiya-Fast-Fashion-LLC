@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, Geist_Mono } from "next/font/google";
+import { Archivo, Cormorant_Garamond, Inter, Geist_Mono } from "next/font/google";
 
-import "@likiya/ui/styles/globals.css";
+import "@/styles/theme.css";
 import { ThemeProvider, Toaster, TooltipProvider } from "@likiya/ui";
+import { PremiumLoader } from "@/components/motion/premium-loader";
 import { Analytics } from "@likiya/analytics";
 import { JsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/seo/structured-data";
 import { buildMetadata } from "@/lib/seo/metadata";
@@ -15,10 +16,18 @@ const fontSans = Inter({
   display: "swap",
 });
 
+const fontDisplay = Archivo({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
+  display: "swap",
+});
+
 const fontSerif = Cormorant_Garamond({
   variable: "--font-serif",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -46,13 +55,24 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("h-full", "antialiased", fontSans.variable, fontSerif.variable, fontMono.variable)}
+      className={cn(
+        "h-full",
+        "antialiased",
+        fontSans.variable,
+        fontDisplay.variable,
+        fontSerif.variable,
+        fontMono.variable,
+      )}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        {/* Storefront art direction is fixed (light: black-on-white with the
+            brand pink), not user/OS-toggled — a fashion editorial identity
+            shouldn't shift with someone's system dark-mode setting. */}
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} forcedTheme="light">
           <TooltipProvider delayDuration={200}>
+            <PremiumLoader />
             {children}
             <Toaster position="bottom-right" />
           </TooltipProvider>

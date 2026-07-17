@@ -12,10 +12,17 @@ const RATE_LIMITED_PREFIXES = ["/api/checkout", "/api/cart", "/api/newsletter", 
  * generated per-request and threaded through `headers()` in the root
  * layout). Everything else here is strict — this still blocks framing,
  * arbitrary form targets, and object/plugin embeds.
+ *
+ * `'unsafe-eval'` is added in development only: `next dev`'s HMR client
+ * runtime evaluates code via `eval()`, which a strict CSP otherwise blocks —
+ * that doesn't just log a warning, it silently breaks hydration (every
+ * client component stays stuck at its pre-hydration `initial` state, e.g.
+ * scroll-reveal animations never firing). Production builds don't use
+ * eval() at all, so this never loosens the deployed policy.
  */
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms",
+  `script-src 'self' 'unsafe-inline' ${process.env.NODE_ENV === "development" ? "'unsafe-eval'" : ""} https://www.googletagmanager.com https://www.clarity.ms`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://*.supabase.co https://images.unsplash.com",
   "font-src 'self' data:",

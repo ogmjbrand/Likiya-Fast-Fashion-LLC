@@ -6,6 +6,7 @@ import { SortSelect } from "@/components/product/sort-select";
 import { getProductList } from "@/features/products/queries";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { createClient } from "@likiya/database/server";
+import { Reveal } from "@/components/motion/reveal";
 
 type SortOption = "newest" | "price_asc" | "price_desc";
 
@@ -69,12 +70,15 @@ export default async function CollectionPage({ params, searchParams }: PageProps
 
   return (
     <div className="container-luxury py-12">
-      <div className="mb-10">
-        <h1 className="font-heading text-4xl">{entry.name}</h1>
-        {entry.description ? (
-          <p className="mt-2 max-w-2xl text-muted-foreground">{entry.description}</p>
-        ) : null}
-      </div>
+      <Reveal>
+        <div className="mb-10 border-b border-border pb-8">
+          <p className="eyebrow-pink">{entry.kind === "collection" ? "Collection" : "Category"}</p>
+          <h1 className="text-display-2 mt-2 font-display font-black uppercase">{entry.name}</h1>
+          {entry.description ? (
+            <p className="mt-3 max-w-2xl text-muted-foreground">{entry.description}</p>
+          ) : null}
+        </div>
+      </Reveal>
 
       <div className="mb-6 flex items-center justify-between">
         <p className="text-sm text-muted-foreground">{total} items</p>
@@ -89,7 +93,7 @@ export default async function CollectionPage({ params, searchParams }: PageProps
             <a
               key={p}
               href={`/collections/${slug}?page=${p}${sort ? `&sort=${sort}` : ""}`}
-              className={p === page ? "font-semibold underline" : "text-muted-foreground"}
+              className={p === page ? "font-semibold text-brand-pink underline" : "text-muted-foreground"}
             >
               {p}
             </a>

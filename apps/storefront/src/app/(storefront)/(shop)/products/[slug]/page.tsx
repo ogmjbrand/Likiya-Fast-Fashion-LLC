@@ -15,6 +15,8 @@ import {
 import { VariantSelector } from "@/components/product/variant-selector";
 import { ReviewsSection } from "@/components/product/reviews-section";
 import { ProductGrid } from "@/components/product/product-grid";
+import { Reveal } from "@/components/motion/reveal";
+import { Parallax } from "@/components/motion/parallax";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -62,21 +64,32 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
       <div className="grid gap-10 lg:grid-cols-2">
         <div className="grid grid-cols-2 gap-2">
-          {product.images.map((image, i) => (
-            <div
-              key={image.id}
-              className={`relative aspect-[3/4] overflow-hidden bg-secondary ${i === 0 ? "col-span-2" : ""}`}
-            >
-              <Image
-                src={image.url}
-                alt={image.alt_text ?? product.name}
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                priority={i === 0}
-                className="object-cover"
-              />
-            </div>
-          ))}
+          {product.images.map((image, i) =>
+            i === 0 ? (
+              <div key={image.id} className="relative col-span-2 aspect-[3/4] overflow-hidden bg-secondary">
+                <Parallax className="absolute inset-0" distance={40}>
+                  <Image
+                    src={image.url}
+                    alt={image.alt_text ?? product.name}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    priority
+                    className="scale-110 object-cover"
+                  />
+                </Parallax>
+              </div>
+            ) : (
+              <Reveal key={image.id} delay={i * 0.08} className="relative aspect-[3/4] overflow-hidden bg-secondary">
+                <Image
+                  src={image.url}
+                  alt={image.alt_text ?? product.name}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </Reveal>
+            ),
+          )}
         </div>
 
         <div className="lg:sticky lg:top-24 lg:self-start">
@@ -85,11 +98,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
               {product.brand.name}
             </p>
           ) : null}
-          <h1 className="mt-1 font-heading text-3xl">{product.name}</h1>
+          <h1 className="text-display-2 mt-1 font-display font-black uppercase">{product.name}</h1>
           {isOnSale ? (
-            <Badge variant="secondary" className="mt-2">
-              Sale
-            </Badge>
+            <Badge className="mt-3 rounded-none bg-brand-pink text-black">Sale</Badge>
           ) : null}
 
           <div className="mt-6">

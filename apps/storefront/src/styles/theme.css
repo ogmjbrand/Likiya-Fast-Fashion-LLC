@@ -1,0 +1,150 @@
+/*
+ * This is the storefront's *only* global CSS entry point (imported once
+ * from layout.tsx) — it pulls in the shared design system first, then
+ * layers this app's brand overrides on top. Tailwind v4 resolves `@apply`
+ * against whatever's already in scope by the time it reaches this file, so
+ * the shared import has to come before anything here that uses `@apply`;
+ * importing both files separately from layout.tsx instead would give this
+ * file no Tailwind context of its own and every `@apply` call would fail.
+ */
+@import "@likiya/ui/styles/globals.css";
+
+/*
+ * Storefront brand theme — overrides `@likiya/ui`'s shared tokens for this
+ * app only (admin keeps its own palette; this file is never imported there).
+ *
+ * Likiya: black & white editorial base, one vivid pink used sparingly as the
+ * brand's signature "shock" accent — sale flags, the logo mark, a single
+ * underline, never as a wash of color. Sharp corners (radius 0) instead of
+ * shadcn's default rounding: luxury editorial reads as cut, not soft.
+ */
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.09 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.09 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.09 0 0);
+  --primary: oklch(0.09 0 0);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.965 0 0);
+  --secondary-foreground: oklch(0.09 0 0);
+  --muted: oklch(0.955 0 0);
+  --muted-foreground: oklch(0.46 0 0);
+  --accent: oklch(0.66 0.24 355);
+  --accent-foreground: oklch(0.09 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.66 0.24 355);
+  --radius: 0rem;
+
+  /* Brand-specific tokens, reached for directly (not through the semantic
+     shadcn slots above) for deliberate brand moments. */
+  --color-brand-pink: oklch(0.66 0.24 355);
+  --color-brand-pink-soft: oklch(0.9 0.09 355);
+  --color-brand-ink: oklch(0.09 0 0);
+  --color-brand-paper: oklch(1 0 0);
+}
+
+.dark {
+  --background: oklch(0.09 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.12 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.12 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: oklch(0.09 0 0);
+  --secondary: oklch(0.18 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.7 0.22 355);
+  --accent-foreground: oklch(0.09 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.7 0.22 355);
+}
+
+@theme inline {
+  --font-display: var(--font-display);
+  --color-brand-pink: var(--color-brand-pink);
+  --color-brand-pink-soft: var(--color-brand-pink-soft);
+  --color-brand-ink: var(--color-brand-ink);
+  --color-brand-paper: var(--color-brand-paper);
+}
+
+@layer base {
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  /* Fluid editorial display sizes — hero headlines that scale with the
+     viewport instead of jumping between fixed breakpoints. */
+  .text-display-1 {
+    font-size: clamp(2.75rem, 4vw + 1.5rem, 7.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  .text-display-2 {
+    font-size: clamp(2rem, 2.4vw + 1.2rem, 4rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .section-ink {
+    @apply bg-brand-ink text-brand-paper;
+  }
+
+  /*
+   * A standalone pink eyebrow, not `.eyebrow` + `text-brand-pink` combined:
+   * both are single-class utilities in the same cascade layer, so which one
+   * wins the `color` property is decided by Tailwind's internal generation
+   * order, not by className order in JSX - in practice `.eyebrow`'s own
+   * `text-muted-foreground` was winning and silently graying out every
+   * "pink eyebrow" on the page.
+   */
+  .eyebrow-pink {
+    @apply text-xs font-medium uppercase tracking-[0.2em] text-brand-pink;
+  }
+
+  /* Restrained glassmorphism, reserved for chrome floating over imagery
+     (sticky nav on the hero, quick-view overlay) — not general surfaces. */
+  .glass {
+    background: color-mix(in oklch, var(--color-brand-paper) 70%, transparent);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+  .glass-ink {
+    background: color-mix(in oklch, var(--color-brand-ink) 55%, transparent);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+
+  .text-stroke-paper {
+    -webkit-text-stroke: 1px var(--color-brand-paper);
+    color: transparent;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}

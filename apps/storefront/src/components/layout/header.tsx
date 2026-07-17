@@ -46,7 +46,7 @@ export function Header() {
 
         <Link
           href="/"
-          className="font-heading text-2xl font-semibold tracking-[0.15em] uppercase lg:flex-1"
+          className="font-display text-2xl font-black tracking-[0.1em] uppercase lg:flex-1"
         >
           {siteConfig.name}
         </Link>
@@ -57,10 +57,12 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium uppercase tracking-wide text-foreground/80 transition-colors hover:text-foreground",
+                "group relative text-sm font-medium uppercase tracking-wide text-foreground/80 transition-colors hover:text-foreground",
+                link.label === "Sale" && "text-brand-pink hover:text-brand-pink",
               )}
             >
               {link.label}
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-brand-pink transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
         </nav>
