@@ -7,8 +7,13 @@ values
   ('cms-assets', 'cms-assets', true, 10485760, array['image/png', 'image/jpeg', 'image/webp'])
 on conflict (id) do nothing;
 
-create policy "product_images_public_read" on storage.objects
-  for select using (bucket_id = 'product-images');
+-- These buckets are `public = true`, so the actual files are already
+-- fetchable by anyone via their public CDN URL — that's independent of RLS.
+-- The `for select` policy below instead governs the storage *listing* API
+-- (enumerating objects in the bucket), which has no reason to be open to
+-- unauthenticated callers; restrict it to staff.
+create policy "product_images_staff_list" on storage.objects
+  for select using (bucket_id = 'product-images' and public.is_staff());
 create policy "product_images_staff_write" on storage.objects
   for insert with check (bucket_id = 'product-images' and public.is_staff());
 create policy "product_images_staff_update" on storage.objects
@@ -16,17 +21,20 @@ create policy "product_images_staff_update" on storage.objects
 create policy "product_images_staff_delete" on storage.objects
   for delete using (bucket_id = 'product-images' and public.is_staff());
 
-create policy "avatars_public_read" on storage.objects
-  for select using (bucket_id = 'avatars');
+create policy "avatars_owner_or_staff_list" on storage.objects
+  for select using (
+    bucket_id = 'avatars'
+    and ((storage.foldername(name))[1] = (select auth.uid())::text or public.is_staff())
+  );
 create policy "avatars_owner_write" on storage.objects
-  for insert with check (bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text);
+  for insert with check (bucket_id = 'avatars' and (storage.foldername(name))[1] = (select auth.uid())::text);
 create policy "avatars_owner_update" on storage.objects
-  for update using (bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text);
+  for update using (bucket_id = 'avatars' and (storage.foldername(name))[1] = (select auth.uid())::text);
 create policy "avatars_owner_delete" on storage.objects
-  for delete using (bucket_id = 'avatars' and (storage.foldername(name))[1] = auth.uid()::text);
+  for delete using (bucket_id = 'avatars' and (storage.foldername(name))[1] = (select auth.uid())::text);
 
-create policy "cms_assets_public_read" on storage.objects
-  for select using (bucket_id = 'cms-assets');
+create policy "cms_assets_staff_list" on storage.objects
+  for select using (bucket_id = 'cms-assets' and public.is_staff());
 create policy "cms_assets_staff_write" on storage.objects
   for all using (bucket_id = 'cms-assets' and public.is_staff())
   with check (bucket_id = 'cms-assets' and public.is_staff());

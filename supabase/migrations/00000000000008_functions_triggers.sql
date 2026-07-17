@@ -6,6 +6,7 @@
 create or replace function public.set_updated_at()
 returns trigger
 language plpgsql
+set search_path = public
 as $$
 begin
   new.updated_at = now();
@@ -58,6 +59,7 @@ create trigger on_auth_user_created
 create or replace function public.products_search_vector_update()
 returns trigger
 language plpgsql
+set search_path = public, extensions
 as $$
 begin
   new.search_vector :=
@@ -80,6 +82,7 @@ create sequence if not exists public.po_number_seq;
 create or replace function public.generate_order_number()
 returns text
 language sql
+set search_path = public
 as $$
   select 'LK-' || to_char(now(), 'YYMM') || '-' || lpad(nextval('public.order_number_seq')::text, 6, '0');
 $$;
@@ -87,6 +90,7 @@ $$;
 create or replace function public.set_order_number()
 returns trigger
 language plpgsql
+set search_path = public
 as $$
 begin
   if new.order_number is null then
@@ -103,6 +107,7 @@ create trigger orders_set_order_number
 create or replace function public.generate_po_number()
 returns text
 language sql
+set search_path = public
 as $$
   select 'PO-' || to_char(now(), 'YYMM') || '-' || lpad(nextval('public.po_number_seq')::text, 5, '0');
 $$;
@@ -110,6 +115,7 @@ $$;
 create or replace function public.set_po_number()
 returns trigger
 language plpgsql
+set search_path = public
 as $$
 begin
   if new.po_number is null then
@@ -128,6 +134,7 @@ create trigger purchase_orders_set_po_number
 create or replace function public.refresh_product_rating()
 returns trigger
 language plpgsql
+set search_path = public
 as $$
 declare
   target_product_id uuid := coalesce(new.product_id, old.product_id);
@@ -170,6 +177,14 @@ language plpgsql
 security definer set search_path = public
 as $$
 begin
+  -- This function is SECURITY DEFINER and auto-exposed via PostgREST RPC, so
+  -- it bypasses RLS entirely — it must authorize itself rather than trusting
+  -- RLS or any caller-supplied parameter. auth.role() reflects the JWT the
+  -- caller actually presented and can't be forged by passing arguments.
+  if auth.role() is distinct from 'service_role' and not public.is_staff() then
+    raise exception 'insufficient privilege to adjust inventory';
+  end if;
+
   insert into public.inventory_levels (variant_id, warehouse_id, quantity_on_hand)
   values (p_variant_id, p_warehouse_id, greatest(p_quantity_delta, 0))
   on conflict (variant_id, warehouse_id)
@@ -213,3 +228,17 @@ $$;
 create trigger orders_award_loyalty_points
   after update of status on public.orders
   for each row execute function public.award_loyalty_points();
+
+-- 8. Lock down trigger-only functions -----------------------------------------
+-- These are never meant to be called directly — triggers invoke them through
+-- a separate internal calling convention that doesn't need EXECUTE granted to
+-- API roles. Without this, PostgREST auto-exposes every one of them as a
+-- public RPC endpoint (/rest/v1/rpc/<fn>).
+
+revoke execute on function public.set_updated_at() from public, anon, authenticated;
+revoke execute on function public.products_search_vector_update() from public, anon, authenticated;
+revoke execute on function public.set_order_number() from public, anon, authenticated;
+revoke execute on function public.set_po_number() from public, anon, authenticated;
+revoke execute on function public.refresh_product_rating() from public, anon, authenticated;
+revoke execute on function public.handle_new_user() from public, anon, authenticated;
+revoke execute on function public.award_loyalty_points() from public, anon, authenticated;
