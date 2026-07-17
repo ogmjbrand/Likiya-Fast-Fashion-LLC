@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { FOOTER_LINKS, siteConfig } from "@likiya/config";
@@ -9,10 +10,22 @@ export function Footer() {
     <footer className="border-t border-border/60 bg-secondary/40">
       <div className="container-luxury grid gap-12 py-16 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr]">
         <div className="space-y-4">
-          <span className="font-heading text-2xl font-semibold uppercase tracking-[0.15em]">
-            {siteConfig.name}
-          </span>
+          <div className="flex items-center gap-2">
+            <Image src="/logo-mark.png" alt="" width={36} height={30} className="h-8 w-auto" />
+            <span className="font-display text-2xl font-black uppercase tracking-[0.1em]">
+              {siteConfig.name}
+            </span>
+          </div>
           <p className="max-w-xs text-sm text-muted-foreground">{siteConfig.description}</p>
+          <div className="max-w-xs space-y-1 text-sm text-muted-foreground">
+            <a href={`tel:${siteConfig.supportPhone.replace(/[^\d+]/g, "")}`} className="block hover:text-brand-pink">
+              {siteConfig.supportPhone}
+            </a>
+            <p>
+              {siteConfig.address.line1}, {siteConfig.address.city}, {siteConfig.address.state}{" "}
+              {siteConfig.address.postalCode}
+            </p>
+          </div>
           <div className="flex gap-3 pt-2">
             <Link href={siteConfig.links.instagram} aria-label="Instagram" className="text-muted-foreground hover:text-foreground">
               <InstagramIcon className="size-5" />

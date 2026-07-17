@@ -13,6 +13,14 @@ export const siteConfig = {
     pinterest: "https://pinterest.com/likiya",
   },
   supportEmail: "care@likiya.com",
+  supportPhone: "+1 716-430-5246",
+  address: {
+    line1: "571 Ontario St",
+    city: "Buffalo",
+    state: "NY",
+    postalCode: "14207",
+    country: "United States",
+  },
   currency: "USD",
   locale: "en-US",
 } as const;

@@ -37,6 +37,25 @@ export default function ContactPage() {
             </a>
           </div>
           <div>
+            <p className="eyebrow-pink">Phone</p>
+            <a
+              href={`tel:${siteConfig.supportPhone.replace(/[^\d+]/g, "")}`}
+              className="mt-1 block hover:text-brand-pink hover:underline"
+            >
+              {siteConfig.supportPhone}
+            </a>
+          </div>
+          <div>
+            <p className="eyebrow-pink">Address</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {siteConfig.address.line1}
+              <br />
+              {siteConfig.address.city}, {siteConfig.address.state} {siteConfig.address.postalCode}
+              <br />
+              {siteConfig.address.country}
+            </p>
+          </div>
+          <div>
             <p className="eyebrow-pink">Response Time</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Monday&ndash;Friday, 9am&ndash;6pm. We aim to reply within one business day.

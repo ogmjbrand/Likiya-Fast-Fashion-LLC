@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, Search, Heart, User, ShoppingBag } from "lucide-react";
@@ -26,7 +27,10 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="left" className="w-[300px]">
               <SheetHeader>
-                <SheetTitle className="font-heading text-2xl">{siteConfig.name}</SheetTitle>
+                <SheetTitle className="flex items-center gap-2 font-display text-xl font-black uppercase">
+                  <Image src="/logo-mark.png" alt="" width={36} height={30} className="h-7 w-auto" />
+                  {siteConfig.name}
+                </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-1 px-4">
                 {NAV_LINKS.map((link) => (
@@ -44,11 +48,11 @@ export function Header() {
           </Sheet>
         </div>
 
-        <Link
-          href="/"
-          className="font-display text-2xl font-black tracking-[0.1em] uppercase lg:flex-1"
-        >
-          {siteConfig.name}
+        <Link href="/" className="flex items-center gap-2 lg:flex-1">
+          <Image src="/logo-mark.png" alt="" width={36} height={30} className="h-8 w-auto" priority />
+          <span className="font-display text-2xl font-black tracking-[0.1em] uppercase">
+            {siteConfig.name}
+          </span>
         </Link>
 
         <nav className="hidden flex-1 items-center justify-center gap-8 lg:flex">
