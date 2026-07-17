@@ -16,6 +16,7 @@ the previous ones already ran.
 | `00000000000008_functions_triggers.sql` | See below |
 | `00000000000009_rls.sql` | Row Level Security policies for every table |
 | `00000000000010_storage.sql` | Storage buckets (`product-images`, `avatars`, `cms-assets`) + their policies |
+| `00000000000011_indexes.sql` | Covering indexes for foreign key columns (Postgres doesn't auto-index these) |
 
 `supabase/seed/seed.sql` inserts a warehouse, a brand, three categories,
 three collections, one sample product with variants, and a welcome coupon —
