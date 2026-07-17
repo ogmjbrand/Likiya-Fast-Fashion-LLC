@@ -20,7 +20,7 @@ import {
   Label,
   Separator,
 } from "@likiya/ui";
-import { formatPrice } from "@likiya/utils";
+import { cn, formatPrice } from "@likiya/utils";
 import { analyticsEvents } from "@likiya/analytics";
 
 import { useCartStore } from "@/features/cart/store";
@@ -97,7 +97,7 @@ export function CheckoutForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <section className="space-y-4">
-            <h2 className="font-heading text-xl">Contact</h2>
+            <h2 className="font-display text-lg font-black uppercase">Contact</h2>
             <FormField
               control={form.control}
               name="email"
@@ -114,7 +114,7 @@ export function CheckoutForm() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="font-heading text-xl">Shipping Address</h2>
+            <h2 className="font-display text-lg font-black uppercase">Shipping Address</h2>
             <FormField
               control={form.control}
               name="shippingAddress.fullName"
@@ -223,7 +223,7 @@ export function CheckoutForm() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="font-heading text-xl">Payment</h2>
+            <h2 className="font-display text-lg font-black uppercase">Payment</h2>
             <FormField
               control={form.control}
               name="provider"
@@ -235,15 +235,30 @@ export function CheckoutForm() {
                       onValueChange={field.onChange}
                       className="space-y-2"
                     >
-                      <Label className="flex items-center gap-3 border border-border p-4">
+                      <Label
+                        className={cn(
+                          "flex items-center gap-3 border p-4 transition-colors",
+                          field.value === "stripe" ? "border-brand-pink" : "border-border",
+                        )}
+                      >
                         <RadioGroupItem value="stripe" />
                         Card (Stripe)
                       </Label>
-                      <Label className="flex items-center gap-3 border border-border p-4">
+                      <Label
+                        className={cn(
+                          "flex items-center gap-3 border p-4 transition-colors",
+                          field.value === "paystack" ? "border-brand-pink" : "border-border",
+                        )}
+                      >
                         <RadioGroupItem value="paystack" />
                         Paystack
                       </Label>
-                      <Label className="flex items-center gap-3 border border-border p-4">
+                      <Label
+                        className={cn(
+                          "flex items-center gap-3 border p-4 transition-colors",
+                          field.value === "flutterwave" ? "border-brand-pink" : "border-border",
+                        )}
+                      >
                         <RadioGroupItem value="flutterwave" />
                         Flutterwave
                       </Label>
@@ -254,14 +269,14 @@ export function CheckoutForm() {
             />
           </section>
 
-          <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+          <Button type="submit" size="lg" className="w-full rounded-none" disabled={isSubmitting}>
             {isSubmitting ? "Redirecting to payment…" : `Pay ${formatPrice(subtotal)}`}
           </Button>
         </form>
       </Form>
 
       <div className="h-fit space-y-4 border border-border p-6">
-        <h2 className="font-heading text-lg">Order Summary</h2>
+        <h2 className="font-display text-base font-black uppercase">Order Summary</h2>
         <ul className="space-y-3">
           {items.map((item) => (
             <li key={item.variantId} className="flex justify-between text-sm">

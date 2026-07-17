@@ -14,16 +14,16 @@ export default async function AccountReturnsPage() {
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="font-heading text-2xl">Returns</h1>
+        <h1 className="font-display text-2xl font-black uppercase">Returns</h1>
       </div>
 
       <div>
-        <h2 className="mb-4 font-heading text-lg">Request a Return</h2>
+        <h2 className="mb-4 font-display text-base font-black uppercase tracking-wide">Request a Return</h2>
         <ReturnForm eligibleOrders={eligibleOrders} />
       </div>
 
       <div>
-        <h2 className="mb-4 font-heading text-lg">Your Requests</h2>
+        <h2 className="mb-4 font-display text-base font-black uppercase tracking-wide">Your Requests</h2>
         {returns.length === 0 ? (
           <p className="text-sm text-muted-foreground">No return requests yet.</p>
         ) : (

@@ -70,6 +70,13 @@ export const useCartStore = create<CartState>()(
       subtotal: () => get().items.reduce((sum, i) => sum + i.price * i.quantity, 0),
       itemCount: () => get().items.reduce((sum, i) => sum + i.quantity, 0),
     }),
-    { name: "likiya-cart" },
+    {
+      name: "likiya-cart",
+      // `isOpen` is transient UI state, not cart data - persisting it meant
+      // adding an item (which opens the drawer) left `isOpen: true` in
+      // localStorage, so the drawer popped open again on every subsequent
+      // page load until a user happened to close it.
+      partialize: (state) => ({ items: state.items }),
+    },
   ),
 );

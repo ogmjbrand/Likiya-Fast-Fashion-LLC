@@ -10,7 +10,7 @@ export default async function AccountAddressesPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="font-heading text-2xl">Addresses</h1>
+      <h1 className="font-display text-2xl font-black uppercase">Addresses</h1>
       <div className="grid gap-8 lg:grid-cols-2">
         <AddressList addresses={addresses} />
         <AddressForm />

@@ -6,6 +6,8 @@ import { formatPrice } from "@likiya/utils";
 import { createAdminClient } from "@likiya/database/admin";
 
 import { ClearCartOnMount } from "./clear-cart";
+import { Reveal } from "@/components/motion/reveal";
+import { Magnetic } from "@/components/motion/magnetic";
 
 export default async function CheckoutSuccessPage({
   searchParams,
@@ -33,22 +35,29 @@ export default async function CheckoutSuccessPage({
   return (
     <div className="container-luxury flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
       <ClearCartOnMount />
-      <p className="eyebrow">Thank you</p>
-      <h1 className="mt-3 font-heading text-3xl">Your order is confirmed</h1>
-      <p className="mt-2 text-muted-foreground">
-        Order #{order.order_number} — {formatPrice(order.total, order.currency)}
-      </p>
-      <p className="mt-1 text-sm text-muted-foreground">
-        We&apos;ve emailed your confirmation. You can track your order anytime from your account.
-      </p>
-      <div className="mt-8 flex gap-4">
-        <Button asChild variant="outline">
-          <Link href="/collections/new-arrivals">Continue Shopping</Link>
-        </Button>
-        <Button asChild>
-          <Link href="/account/orders">View Orders</Link>
-        </Button>
-      </div>
+      <Reveal>
+        <div className="mx-auto mb-6 h-px w-16 bg-brand-pink" />
+        <p className="eyebrow-pink">Thank You</p>
+        <h1 className="mt-3 font-display text-3xl font-black uppercase">Your order is confirmed</h1>
+        <p className="mt-3 text-muted-foreground">
+          Order #{order.order_number} &mdash; {formatPrice(order.total, order.currency)}
+        </p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          We&apos;ve emailed your confirmation. You can track your order anytime from your account.
+        </p>
+        <div className="mt-8 flex gap-4">
+          <Magnetic>
+            <Button asChild variant="outline" className="rounded-none">
+              <Link href="/collections/new-arrivals">Continue Shopping</Link>
+            </Button>
+          </Magnetic>
+          <Magnetic>
+            <Button asChild className="rounded-none">
+              <Link href="/account/orders">View Orders</Link>
+            </Button>
+          </Magnetic>
+        </div>
+      </Reveal>
     </div>
   );
 }

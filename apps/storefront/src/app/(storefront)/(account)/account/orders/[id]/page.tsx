@@ -25,7 +25,7 @@ export default async function AccountOrderDetailPage({
     <div className="space-y-8">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="font-heading text-2xl">Order #{order.order_number}</h1>
+          <h1 className="font-display text-2xl font-black uppercase">Order #{order.order_number}</h1>
           <p className="text-sm text-muted-foreground">{formatDate(order.created_at)}</p>
         </div>
         <Badge variant="secondary">{ORDER_STATUS_LABELS[order.status]}</Badge>
@@ -44,7 +44,7 @@ export default async function AccountOrderDetailPage({
 
       <div className="grid gap-8 lg:grid-cols-2">
         <div>
-          <h2 className="font-heading text-lg">Items</h2>
+          <h2 className="font-display text-base font-black uppercase tracking-wide">Items</h2>
           <ul className="mt-3 space-y-3">
             {order.items.map((item) => (
               <li key={item.id} className="flex justify-between text-sm">
@@ -82,7 +82,7 @@ export default async function AccountOrderDetailPage({
 
         {shippingAddress ? (
           <div>
-            <h2 className="font-heading text-lg">Shipping Address</h2>
+            <h2 className="font-display text-base font-black uppercase tracking-wide">Shipping Address</h2>
             <div className="mt-3 text-sm text-muted-foreground">
               <p>{shippingAddress.full_name}</p>
               <p>{shippingAddress.line1}</p>

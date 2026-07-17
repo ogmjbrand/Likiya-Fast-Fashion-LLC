@@ -14,7 +14,7 @@ export function AddressForm() {
 
   return (
     <form action={formAction} className="space-y-4 border border-border p-6">
-      <h2 className="font-heading text-lg">Add Address</h2>
+      <h2 className="font-display text-base font-black uppercase tracking-wide">Add Address</h2>
       <div className="space-y-1.5">
         <Label htmlFor="fullName">Full Name</Label>
         <Input id="fullName" name="fullName" required />

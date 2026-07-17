@@ -26,7 +26,7 @@ export function LoginForm() {
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <Label htmlFor="password">Password</Label>
-            <Link href="/forgot-password" className="text-xs text-muted-foreground hover:underline">
+            <Link href="/forgot-password" className="text-xs text-muted-foreground hover:text-brand-pink hover:underline">
               Forgot password?
             </Link>
           </div>
@@ -59,7 +59,7 @@ export function LoginForm() {
 
       <p className="text-center text-sm text-muted-foreground">
         Don&apos;t have an account?{" "}
-        <Link href="/register" className="underline underline-offset-4">
+        <Link href="/register" className="underline underline-offset-4 hover:text-brand-pink">
           Create one
         </Link>
       </p>

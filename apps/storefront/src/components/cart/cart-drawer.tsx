@@ -7,6 +7,7 @@ import { Minus, Plus, X } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter, Button, Separator } from "@likiya/ui";
 import { useCartStore } from "@/features/cart/store";
 import { formatPrice } from "@likiya/utils";
+import { Magnetic } from "@/components/motion/magnetic";
 
 export function CartDrawer() {
   const isOpen = useCartStore((s) => s.isOpen);
@@ -20,7 +21,7 @@ export function CartDrawer() {
     <Sheet open={isOpen} onOpenChange={(open: boolean) => !open && close()}>
       <SheetContent side="right" className="flex w-full flex-col gap-0 sm:max-w-md">
         <SheetHeader>
-          <SheetTitle className="font-heading text-xl">
+          <SheetTitle className="font-display text-xl font-black uppercase">
             Your Bag {items.length > 0 ? `(${items.length})` : ""}
           </SheetTitle>
         </SheetHeader>
@@ -28,9 +29,11 @@ export function CartDrawer() {
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
             <p className="text-muted-foreground">Your bag is empty.</p>
-            <Button onClick={close} asChild>
-              <Link href="/collections/new-arrivals">Continue Shopping</Link>
-            </Button>
+            <Magnetic>
+              <Button onClick={close} asChild className="rounded-none">
+                <Link href="/collections/new-arrivals">Continue Shopping</Link>
+              </Button>
+            </Magnetic>
           </div>
         ) : (
           <>
@@ -66,7 +69,7 @@ export function CartDrawer() {
                         <button
                           onClick={() => removeItem(item.variantId)}
                           aria-label={`Remove ${item.productName}`}
-                          className="text-muted-foreground hover:text-foreground"
+                          className="text-muted-foreground hover:text-brand-pink"
                         >
                           <X className="size-4" />
                         </button>
@@ -109,9 +112,11 @@ export function CartDrawer() {
                 Shipping and taxes calculated at checkout.
               </p>
               <Separator />
-              <Button asChild size="lg" className="w-full" onClick={close}>
-                <Link href="/checkout">Checkout</Link>
-              </Button>
+              <Magnetic className="block w-full">
+                <Button asChild size="lg" className="w-full rounded-none" onClick={close}>
+                  <Link href="/checkout">Checkout</Link>
+                </Button>
+              </Magnetic>
             </SheetFooter>
           </>
         )}

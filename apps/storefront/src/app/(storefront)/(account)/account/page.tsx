@@ -14,14 +14,14 @@ export default async function AccountOverviewPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-heading text-2xl">Welcome back{profile?.full_name ? `, ${profile.full_name}` : ""}</h1>
+        <h1 className="font-display text-2xl font-black uppercase">Welcome back{profile?.full_name ? `, ${profile.full_name}` : ""}</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          You have {profile?.loyalty_points ?? 0} loyalty points.
+          You have <span className="font-semibold text-brand-pink">{profile?.loyalty_points ?? 0}</span> loyalty points.
         </p>
       </div>
 
       <div>
-        <h2 className="font-heading text-lg">Recent Orders</h2>
+        <h2 className="font-display text-base font-black uppercase tracking-wide">Recent Orders</h2>
         {orders.length === 0 ? (
           <p className="mt-2 text-sm text-muted-foreground">You haven&apos;t placed any orders yet.</p>
         ) : (
@@ -29,7 +29,7 @@ export default async function AccountOverviewPage() {
             {orders.slice(0, 5).map((order) => (
               <li key={order.id} className="flex items-center justify-between py-3">
                 <div>
-                  <Link href={`/account/orders/${order.id}`} className="font-medium hover:underline">
+                  <Link href={`/account/orders/${order.id}`} className="font-medium hover:text-brand-pink hover:underline">
                     #{order.order_number}
                   </Link>
                   <p className="text-xs text-muted-foreground">{formatDate(order.created_at)}</p>

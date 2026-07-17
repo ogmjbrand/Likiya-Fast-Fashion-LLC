@@ -18,12 +18,13 @@ export default async function SearchPage({
 
   return (
     <div className="container-luxury py-12">
-      <h1 className="font-heading text-3xl">
-        {query ? `Results for "${query}"` : "Search"}
+      <p className="eyebrow-pink">Search</p>
+      <h1 className="mt-2 font-display text-3xl font-black uppercase">
+        {query ? `Results for "${query}"` : "Find Something"}
       </h1>
 
       <form action="/search" method="GET" className="mt-6 max-w-md">
-        <Input name="q" defaultValue={query} placeholder="Search products…" autoFocus />
+        <Input name="q" defaultValue={query} placeholder="Search products…" autoFocus className="rounded-none" />
       </form>
 
       <p className="mt-4 text-sm text-muted-foreground">

@@ -13,7 +13,7 @@ export default async function AccountOrdersPage() {
 
   return (
     <div>
-      <h1 className="font-heading text-2xl">Orders</h1>
+      <h1 className="font-display text-2xl font-black uppercase">Orders</h1>
 
       {orders.length === 0 ? (
         <p className="mt-4 text-sm text-muted-foreground">You haven&apos;t placed any orders yet.</p>
@@ -22,7 +22,7 @@ export default async function AccountOrdersPage() {
           {orders.map((order) => (
             <li key={order.id} className="flex items-center justify-between py-4">
               <div>
-                <Link href={`/account/orders/${order.id}`} className="font-medium hover:underline">
+                <Link href={`/account/orders/${order.id}`} className="font-medium hover:text-brand-pink hover:underline">
                   #{order.order_number}
                 </Link>
                 <p className="text-xs text-muted-foreground">{formatDate(order.created_at)}</p>

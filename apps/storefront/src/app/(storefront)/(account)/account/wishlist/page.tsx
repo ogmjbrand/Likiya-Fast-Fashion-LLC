@@ -9,7 +9,7 @@ export default async function AccountWishlistPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="font-heading text-2xl">Wishlist</h1>
+      <h1 className="font-display text-2xl font-black uppercase">Wishlist</h1>
       {items.length === 0 ? (
         <p className="text-sm text-muted-foreground">Your wishlist is empty.</p>
       ) : (

@@ -16,7 +16,7 @@ export default function RegisterPage() {
     <div className="container-luxury flex min-h-[70vh] items-center justify-center py-16">
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center">
-          <h1 className="font-heading text-3xl">Create Account</h1>
+          <h1 className="font-display text-3xl font-black uppercase">Create Account</h1>
           <p className="mt-2 text-sm text-muted-foreground">Join Likiya for faster checkout and order tracking.</p>
         </div>
 
@@ -51,7 +51,7 @@ export default function RegisterPage() {
 
         <p className="text-center text-sm text-muted-foreground">
           Already have an account?{" "}
-          <Link href="/login" className="underline underline-offset-4">
+          <Link href="/login" className="underline underline-offset-4 hover:text-brand-pink">
             Sign in
           </Link>
         </p>
