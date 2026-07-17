@@ -77,16 +77,23 @@ export function TextReveal({
   return (
     <span ref={ref} className={className} aria-label={text}>
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden pb-[0.1em] align-bottom" aria-hidden>
-          <motion.span
-            className={`inline-block ${wordClassName ?? ""}`}
-            initial={{ y: "110%" }}
-            animate={{ y: inView ? "0%" : "110%" }}
-            transition={{ duration: 0.9, delay: delay + i * stagger, ease: EASE }}
-          >
-            {word}
-            {i < words.length - 1 ? " " : ""}
-          </motion.span>
+        // The separating space is a plain sibling text node, not content
+        // inside either inline-block span: a space at the trailing edge of
+        // an inline-block's own line box gets collapsed away by the usual
+        // CSS whitespace-trimming rules, which silently ran every word
+        // together when the space lived inside the word span instead.
+        <span key={i} aria-hidden>
+          <span className="inline-block overflow-hidden pb-[0.1em] align-bottom">
+            <motion.span
+              className={`inline-block ${wordClassName ?? ""}`}
+              initial={{ y: "110%" }}
+              animate={{ y: inView ? "0%" : "110%" }}
+              transition={{ duration: 0.9, delay: delay + i * stagger, ease: EASE }}
+            >
+              {word}
+            </motion.span>
+          </span>
+          {i < words.length - 1 ? " " : ""}
         </span>
       ))}
     </span>

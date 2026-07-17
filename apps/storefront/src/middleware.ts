@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@likiya/auth/middleware";
 import { checkRateLimit } from "@likiya/utils/rate-limit";
 
-const RATE_LIMITED_PREFIXES = ["/api/checkout", "/api/cart", "/api/newsletter", "/api/reviews"];
+const RATE_LIMITED_PREFIXES = ["/api/checkout", "/api/cart", "/api/newsletter", "/api/reviews", "/api/contact"];
 
 /**
  * `'unsafe-inline'` on script-src is a deliberate compromise: GA4/Clarity's
