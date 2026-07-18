@@ -76,7 +76,11 @@ export default async function HomePage() {
       <Marquee />
 
       <section className="container-luxury py-24">
-        <div className="grid gap-4 sm:grid-cols-3">
+        <Reveal>
+          <p className="eyebrow-pink">Shop By Category</p>
+          <h2 className="mt-2 font-display text-2xl font-black uppercase">Every Section</h2>
+        </Reveal>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <CategoryTile
             href="/collections/women"
             label="Women"
@@ -90,10 +94,34 @@ export default async function HomePage() {
             image="https://images.unsplash.com/photo-1516257984-b1b4d707412e?w=900"
           />
           <CategoryTile
+            href="/collections/shoes"
+            label="Shoes"
+            index="03"
+            image="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=900"
+          />
+          <CategoryTile
+            href="/collections/bags"
+            label="Bags"
+            index="04"
+            image="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=900"
+          />
+          <CategoryTile
             href="/collections/accessories"
             label="Accessories"
-            index="03"
+            index="05"
             image="https://images.unsplash.com/photo-1591561954557-26941169b49e?w=900"
+          />
+          <CategoryTile
+            href="/collections/body-cream"
+            label="Body Cream"
+            index="06"
+            image="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=900"
+          />
+          <CategoryTile
+            href="/collections/hair-oil"
+            label="Hair Oil"
+            index="07"
+            image="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=900"
           />
         </div>
       </section>

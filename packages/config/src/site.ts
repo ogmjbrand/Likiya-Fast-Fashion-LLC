@@ -12,7 +12,7 @@ export const siteConfig = {
     tiktok: "https://tiktok.com/@likiya",
     pinterest: "https://pinterest.com/likiya",
   },
-  supportEmail: "care@likiya.com",
+  supportEmail: "Likiyafastfashionllc1@yahoo.com",
   supportPhone: "+1 716-430-5246",
   address: {
     line1: "571 Ontario St",
@@ -29,7 +29,11 @@ export const NAV_LINKS = [
   { label: "New Arrivals", href: "/collections/new-arrivals" },
   { label: "Women", href: "/collections/women" },
   { label: "Men", href: "/collections/men" },
+  { label: "Shoes", href: "/collections/shoes" },
+  { label: "Bags", href: "/collections/bags" },
   { label: "Accessories", href: "/collections/accessories" },
+  { label: "Body Cream", href: "/collections/body-cream" },
+  { label: "Hair Oil", href: "/collections/hair-oil" },
   { label: "Sale", href: "/collections/sale" },
 ] as const;
 

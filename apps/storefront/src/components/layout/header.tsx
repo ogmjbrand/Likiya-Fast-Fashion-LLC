@@ -18,7 +18,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container-luxury flex h-18 items-center justify-between py-4">
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Open menu">
@@ -55,13 +55,13 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden flex-1 items-center justify-center gap-8 lg:flex">
+        <nav className="hidden flex-1 items-center justify-center gap-4 xl:flex 2xl:gap-6">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "group relative text-sm font-medium uppercase tracking-wide text-foreground/80 transition-colors hover:text-foreground",
+                "group relative whitespace-nowrap text-xs font-medium uppercase tracking-wide text-foreground/80 transition-colors hover:text-foreground 2xl:text-sm",
                 link.label === "Sale" && "text-brand-pink hover:text-brand-pink",
               )}
             >
