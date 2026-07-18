@@ -8,8 +8,8 @@ import { getFeaturedProducts, getNewArrivals } from "@/features/products/queries
 import { buildMetadata } from "@/lib/seo/metadata";
 import { Reveal, TextReveal } from "@/components/motion/reveal";
 import { Magnetic } from "@/components/motion/magnetic";
-import { Parallax } from "@/components/motion/parallax";
 import { Marquee } from "@/components/marketing/marquee";
+import { CinematicHeroLoader } from "@/components/home/cinematic-hero-loader";
 
 export const metadata: Metadata = buildMetadata({
   title: "Likiya | Luxury Streetwear, Considered",
@@ -26,52 +26,7 @@ export default async function HomePage() {
 
   return (
     <div>
-      <section className="section-ink relative flex h-[92vh] min-h-[620px] items-end overflow-hidden">
-        <Parallax className="absolute inset-0" distance={140}>
-          <Image
-            src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1800"
-            alt="Likiya Autumn Collection"
-            fill
-            priority
-            sizes="100vw"
-            className="scale-110 object-cover opacity-70"
-          />
-        </Parallax>
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10" />
-
-        <div className="container-luxury relative z-10 pb-24">
-          <p className="eyebrow-pink">Fall/Winter — The Considered Edit</p>
-          <h1 className="text-display-1 mt-4 max-w-4xl font-display font-black uppercase text-white">
-            <TextReveal text="Fast fashion," />
-            <br />
-            <TextReveal text="cut like" delay={0.12} />{" "}
-            <TextReveal text="couture." delay={0.24} wordClassName="text-brand-pink" />
-          </h1>
-          <Reveal delay={0.6}>
-            <div className="mt-10 flex flex-wrap items-center gap-6">
-              <Magnetic>
-                <Button
-                  asChild
-                  size="lg"
-                  className="rounded-none bg-white px-8 text-black hover:bg-brand-pink hover:text-black"
-                >
-                  <Link href="/collections/new-arrivals">Shop New Arrivals</Link>
-                </Button>
-              </Magnetic>
-              {/* TODO: point at /lookbook once that page exists (Phase 2) -
-                  a dead link here isn't just a 404, Next's Link prefetch
-                  fires as soon as this hero is in the viewport, which is
-                  every page load. */}
-              <Link
-                href="/collections/best-sellers"
-                className="text-sm font-medium uppercase tracking-[0.2em] text-white/80 underline decoration-brand-pink underline-offset-8 hover:text-white"
-              >
-                View Best Sellers
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <CinematicHeroLoader />
 
       <Marquee />
 

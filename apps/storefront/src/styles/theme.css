@@ -70,6 +70,7 @@
 
 @theme inline {
   --font-display: var(--font-display);
+  --font-cinematic: var(--font-cinematic);
   --color-brand-pink: var(--color-brand-pink);
   --color-brand-pink-soft: var(--color-brand-pink-soft);
   --color-brand-ink: var(--color-brand-ink);
@@ -128,6 +129,45 @@
   .text-stroke-paper {
     -webkit-text-stroke: 1px var(--color-brand-paper);
     color: transparent;
+  }
+
+  /* CinematicHero slide + per-letter reveal states, toggled imperatively
+     via classList in the WebGL render loop rather than React state, so
+     scroll-driven activation doesn't trigger a re-render every frame. */
+  .cinematic-slide {
+    transform: translateY(24px);
+  }
+  .cinematic-slide-active {
+    opacity: 1 !important;
+    transform: translateY(0);
+  }
+  .cinematic-char {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
+    transition:
+      opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+      transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+      filter 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .cinematic-slide-active .cinematic-char {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  .cinematic-desc {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s,
+      transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
+  }
+  .cinematic-slide-active .cinematic-desc {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .cinematic-slide-active .cinematic-cta {
+    pointer-events: auto;
   }
 
   @keyframes marquee {
