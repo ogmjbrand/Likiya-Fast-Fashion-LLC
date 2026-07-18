@@ -152,6 +152,7 @@ export function CinematicHero() {
     const canvas = canvasRef.current;
     const video = videoRef.current;
     if (!section || !sticky || !canvas || !video) return;
+    const videoEl = video;
 
     let width = sticky.clientWidth;
     let height = sticky.clientHeight;
@@ -305,7 +306,7 @@ export function CinematicHero() {
       bgUniforms.uScroll.value = progress;
       bgUniforms.uMouse.value.set(mouseX, -mouseY);
 
-      const videoReady = video.readyState >= 2 ? 1 : 0;
+      const videoReady = videoEl.readyState >= 2 ? 1 : 0;
       billboardMaterial.opacity += (videoReady - billboardMaterial.opacity) * Math.min(1, delta * 2);
 
       const angle = progress * Math.PI * 2;
