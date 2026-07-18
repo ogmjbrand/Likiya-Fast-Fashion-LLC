@@ -2,10 +2,14 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { updateSession } from "@likiya/auth/middleware";
 
-// No third-party scripts run in the admin app, so script-src stays 'self' only.
+// No third-party scripts run in the admin app, but 'unsafe-inline' is still
+// needed: next-themes injects a small inline bootstrap script (sets the
+// theme class before first paint, to avoid a flash of the wrong theme) that
+// a strict 'self'-only script-src silently blocks — confirmed live via a
+// CSP violation on the deployed /login page, not just a theoretical gap.
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
-  "script-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://*.supabase.co",
   "font-src 'self' data:",
