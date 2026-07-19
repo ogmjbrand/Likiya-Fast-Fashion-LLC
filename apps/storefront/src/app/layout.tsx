@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Cormorant_Garamond, Inter, Geist_Mono, Italiana } from "next/font/google";
+import { Archivo, Cormorant_Garamond, Inter, Geist_Mono } from "next/font/google";
 
 import "@/styles/theme.css";
 import { ThemeProvider, Toaster, TooltipProvider } from "@likiya/ui";
@@ -36,13 +36,6 @@ const fontMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const fontCinematic = Italiana({
-  variable: "--font-cinematic",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   ...buildMetadata({ title: `${siteConfig.fullName} | Considered Luxury Fashion` }),
   metadataBase: new URL(siteConfig.url),
@@ -69,7 +62,6 @@ export default function RootLayout({
         fontDisplay.variable,
         fontSerif.variable,
         fontMono.variable,
-        fontCinematic.variable,
       )}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">

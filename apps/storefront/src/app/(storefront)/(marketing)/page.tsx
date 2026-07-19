@@ -9,7 +9,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { Reveal, TextReveal } from "@/components/motion/reveal";
 import { Magnetic } from "@/components/motion/magnetic";
 import { Marquee } from "@/components/marketing/marquee";
-import { CinematicHeroLoader } from "@/components/home/cinematic-hero-loader";
+import { HeroSlideshow } from "@/components/home/hero-slideshow";
 
 export const metadata: Metadata = buildMetadata({
   title: "Likiya | Luxury Streetwear, Considered",
@@ -26,7 +26,7 @@ export default async function HomePage() {
 
   return (
     <div>
-      <CinematicHeroLoader />
+      <HeroSlideshow />
 
       <Marquee />
 
