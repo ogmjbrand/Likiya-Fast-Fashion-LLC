@@ -10,7 +10,7 @@ import { Magnetic } from "@/components/motion/magnetic";
 
 export const metadata: Metadata = buildMetadata({
   title: "Our Story",
-  description: "Likiya is luxury streetwear built at fast-fashion speed — modern African elegance, cut for a decade of wear.",
+  description: "Likiya is luxury streetwear built at fast-fashion speed — New York-born, cut for a decade of wear.",
   path: "/about",
 });
 
@@ -42,19 +42,19 @@ export default function AboutPage() {
         <div className="grid gap-12 lg:grid-cols-2">
           <Reveal>
             <p className="eyebrow-pink">Where We Started</p>
-            <h2 className="mt-2 font-display text-2xl font-black uppercase">Lagos to everywhere</h2>
+            <h2 className="mt-2 font-display text-2xl font-black uppercase">New York to everywhere</h2>
             <p className="mt-4 text-muted-foreground">
-              Likiya started from a simple frustration: fast fashion moved at the speed culture
-              demanded, but nothing about it felt considered. High fashion was considered, but it
-              moved at the speed of a runway calendar, six months behind the street. We wanted
-              both — pieces that respond to what&apos;s happening now, cut and finished like
-              they&apos;re meant to last.
+              Likiya started in New York from a simple frustration: fast fashion moved at the
+              speed culture demanded, but nothing about it felt considered. High fashion was
+              considered, but it moved at the speed of a runway calendar, six months behind the
+              street. We wanted both — pieces that respond to what&apos;s happening now, cut and
+              finished like they&apos;re meant to last.
             </p>
             <p className="mt-4 text-muted-foreground">
-              Every collection draws from modern African design language — bold silhouettes,
-              considered color, pattern used with intent — filtered through a streetwear
-              sensibility and finished to a genuine luxury standard. Not a reference. A starting
-              point.
+              Every collection draws from New York&apos;s street-to-runway pipeline — bold
+              silhouettes, considered color, construction used with intent — filtered through a
+              downtown sensibility and finished to a genuine luxury standard. American made
+              attitude, built to last.
             </p>
           </Reveal>
           <Reveal delay={0.15} className="relative aspect-[4/5] overflow-hidden bg-secondary">

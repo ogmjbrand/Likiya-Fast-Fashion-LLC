@@ -1,6 +1,6 @@
 const STATEMENTS = [
   "Luxury Streetwear",
-  "Modern African Elegance",
+  "New York Born",
   "High Fashion",
   "Considered, Not Disposable",
 ];
